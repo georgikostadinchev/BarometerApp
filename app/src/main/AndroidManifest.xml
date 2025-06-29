@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.barometerservice">
+
+    <!-- Permissions for Bluetooth communication -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <!-- Required for Bluetooth scanning on Android 6.0+ (API 23+), though not strictly for SPP on 4.1,
+         it's good practice for future compatibility if the app were to be updated. -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- Required for foreground service on Android 9+ (API 28+), but good to include -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+
+    <!-- Feature declaration for Bluetooth. This makes the app only available on devices with Bluetooth. -->
+    <uses-feature android:name="android.hardware.bluetooth" android:required="true" />
+    <!-- Feature declaration for the barometer sensor. This makes the app only available on devices with a barometer. -->
+    <uses-feature android:name="android.hardware.sensor.barometer" android:required="true" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.BarometerService">
+
+        <!-- Declare your background service -->
+        <service
+            android:name=".BarometerService"
+            android:enabled="true"
+            android:exported="false" />
+
+        <!-- An activity is still needed to launch the service, even if it has no UI.
+             This activity will immediately start the service and then finish. -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+    </application>
+</manifest>
