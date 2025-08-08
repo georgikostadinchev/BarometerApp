@@ -19,6 +19,8 @@ jobs:
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
+        env:
+          SKIP_JDK_VERSION_CHECK: true  # 💡 Пропуска проверката за версията
 
       - name: Install SDK components
         run: |
