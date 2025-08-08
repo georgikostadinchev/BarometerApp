@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
+    namespace "com.example.barometerservice"   // <-- добави това
     compileSdk 34
 
     defaultConfig {
